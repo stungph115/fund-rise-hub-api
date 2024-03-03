@@ -8,6 +8,36 @@ import { ExceptionFilter } from './exception.filter'
 import { MailerModule } from './mailer/mailer.module';
 import { UserModule } from './user/user.module';
 import { RoleModule } from './role/role.module';
+import { MessageModule } from './message/message.module';
+import { ProjectModule } from './project/project.module';
+import { FavoriteModule } from './favorite/favorite.module';
+import { CampaignModule } from './campaign/campaign.module';
+import { UpdateModule } from './update/update.module';
+import { CommentModule } from './comment/comment.module';
+import { FaqModule } from './faq/faq.module';
+import { RewardModule } from './reward/reward.module';
+import { AddonsModule } from './addons/addons.module';
+import { RewardEarnedModule } from './reward-earned/reward-earned.module';
+import { AddonsEarnedModule } from './addons-earned/addons-earned.module';
+import { NotificationModule } from './notification/notification.module';
+import { ConversationModule } from './conversation/conversation.module';
+import { User } from './user/user.entity';
+import { Update } from './update/update.entity';
+import { Role } from './role/role.entity';
+import { RewardEarned } from './reward-earned/reward-earned.entity';
+import { Reward } from './reward/reward.entity';
+import { Project } from './project/project.entity';
+import { Notification } from './notification/notification.enity';
+import { Message } from './message/message.entity';
+import { Favorite } from './favorite/favorite.entity';
+import { FaQ } from './faq/faq.entity';
+import { Conversation } from './conversation/conversation.entity';
+import { Comment } from './comment/comment.entity';
+import { Campaign } from './campaign/campaign.entity';
+import { AddonsEarned } from './addons-earned/addons-earned.entity';
+import { Addons } from './addons/addons.entity';
+import { FileModule } from './file/file.module';
+import { FileChatModule } from './file-chat/file-chat.module';
 
 @Module({
   imports: [
@@ -18,7 +48,7 @@ import { RoleModule } from './role/role.module';
       username: env.DATABASE_USER,
       password: env.DATABASE_PASS,
       database: env.DATABASE_NAME,
-      entities: [],
+      entities: [User, Update, Role, RewardEarned, Reward, Project, Notification, Message, Favorite, FaQ, Conversation, Comment, Campaign, AddonsEarned, Addons],
       synchronize: true,
       bigNumberStrings: false,
       /* logging: true */
@@ -26,6 +56,21 @@ import { RoleModule } from './role/role.module';
     MailerModule,
     UserModule,
     RoleModule,
+    MessageModule,
+    ProjectModule,
+    FavoriteModule,
+    CampaignModule,
+    UpdateModule,
+    CommentModule,
+    FaqModule,
+    RewardModule,
+    AddonsModule,
+    RewardEarnedModule,
+    AddonsEarnedModule,
+    NotificationModule,
+    ConversationModule,
+    FileModule,
+    FileChatModule,
   ],
   controllers: [AppController],
   providers: [
