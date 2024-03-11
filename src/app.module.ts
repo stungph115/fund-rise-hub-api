@@ -38,6 +38,8 @@ import { AddonsEarned } from './addons-earned/addons-earned.entity';
 import { Addons } from './addons/addons.entity';
 import { FileModule } from './file/file.module';
 import { FileChatModule } from './file-chat/file-chat.module';
+import { CategoryModule } from './category/category.module';
+import { SubCategoryModule } from './sub-category/sub-category.module';
 
 @Module({
   imports: [
@@ -71,6 +73,8 @@ import { FileChatModule } from './file-chat/file-chat.module';
     ConversationModule,
     FileModule,
     FileChatModule,
+    CategoryModule,
+    SubCategoryModule,
   ],
   controllers: [AppController],
   providers: [
