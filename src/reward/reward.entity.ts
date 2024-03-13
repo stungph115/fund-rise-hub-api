@@ -1,5 +1,7 @@
+import { Addons } from "src/addons/addons.entity";
 import { Project } from "src/project/project.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { RewardEarned } from "src/reward-earned/reward-earned.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: 'reward' })
 export class Reward {
@@ -10,14 +12,27 @@ export class Reward {
     project: Project
 
     @Column()
+    title: string
+
+    @Column()
     description: string
+
+    @Column({ nullable: true })
+    photo: string
 
     @Column()
     price: number
-    
+
+    @OneToMany(() => RewardEarned, (rewardEarned) => rewardEarned.reward)
+    rewardEarned: RewardEarned[]
+
+    @OneToMany(() => Addons, (addons) => addons.reward)
+    addons: Addons[]
+
     @Column()
     createdAt: Date
 
     @Column()
     updatedAt: Date
+
 }

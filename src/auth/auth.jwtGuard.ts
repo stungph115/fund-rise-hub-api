@@ -4,9 +4,7 @@ import { JwtService } from '@nestjs/jwt'
 import { Reflector } from '@nestjs/core'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from 'src/user/user.entity'
-import { MoreThan, Repository } from 'typeorm'
-const moment = require('moment')
-const fs = require('fs/promises')
+import { Repository } from 'typeorm'
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
@@ -45,7 +43,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
             if (!user) {
                 throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED)
             }
-
             const role = this.reflector.get<string>('role', context.getHandler())
 
             request.body['userId'] = user.id
@@ -69,12 +66,9 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
                 return false
             }
         } catch (error) {
-            console.error('Something wrong happened while checking authorization', error)
             throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED)
         }
 
     }
-
- 
 
 }

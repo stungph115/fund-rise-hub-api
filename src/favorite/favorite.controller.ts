@@ -1,4 +1,7 @@
 import { Controller } from '@nestjs/common';
+import { FavoriteService } from './favorite.service';
 
 @Controller('favorite')
-export class FavoriteController {}
+export class FavoriteController {
+    constructor(private favoriteService: FavoriteService) { }
+}

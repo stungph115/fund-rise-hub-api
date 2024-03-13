@@ -1,4 +1,7 @@
 import { Controller } from '@nestjs/common';
+import { FaqService } from './faq.service';
 
 @Controller('faq')
-export class FaqController {}
+export class FaqController {
+    constructor(private faqService: FaqService) { }
+}

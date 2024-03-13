@@ -6,7 +6,7 @@ import { User } from './user.entity';
 import { Role } from 'src/role/role.entity';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { env } from 'process';
+import { env } from 'env';
 
 @Module({
   imports: [

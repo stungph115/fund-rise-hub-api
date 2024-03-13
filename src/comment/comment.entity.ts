@@ -10,6 +10,9 @@ export class Comment {
     project: Project
 
     @Column()
+    content: string
+
+    @Column()
     createdAt: Date
 
     @Column()

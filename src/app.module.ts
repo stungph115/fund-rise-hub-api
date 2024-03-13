@@ -40,6 +40,8 @@ import { FileModule } from './file/file.module';
 import { FileChatModule } from './file-chat/file-chat.module';
 import { CategoryModule } from './category/category.module';
 import { SubCategoryModule } from './sub-category/sub-category.module';
+import { Category } from './category/category.entity';
+import { SubCategory } from './sub-category/sub-category.entity';
 
 @Module({
   imports: [
@@ -50,7 +52,26 @@ import { SubCategoryModule } from './sub-category/sub-category.module';
       username: env.DATABASE_USER,
       password: env.DATABASE_PASS,
       database: env.DATABASE_NAME,
-      entities: [User, Update, Role, RewardEarned, Reward, Project, Notification, Message, Favorite, FaQ, Conversation, Comment, Campaign, AddonsEarned, Addons],
+      entities: [
+        User,
+        Update,
+        Role,
+        RewardEarned,
+        Reward,
+        Project,
+        Notification,
+        Message,
+        Favorite,
+        FaQ,
+        Conversation,
+        Comment,
+        Campaign,
+        AddonsEarned,
+        Addons,
+        Category,
+        SubCategory,
+
+      ],
       synchronize: true,
       bigNumberStrings: false,
       /* logging: true */

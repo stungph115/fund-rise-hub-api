@@ -10,6 +10,12 @@ export class Campaign {
     project: Project
 
     @Column()
+    title: string
+
+    @Column('mediumtext')
+    content: string
+
+    @Column()
     createdAt: Date
 
     @Column()

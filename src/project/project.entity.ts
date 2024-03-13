@@ -2,6 +2,7 @@ import { Campaign } from "src/campaign/campaign.entity";
 import { Category } from "src/category/category.entity";
 import { Comment } from "src/comment/comment.entity";
 import { FaQ } from "src/faq/faq.entity";
+import { Favorite } from "src/favorite/favorite.entity";
 import { Reward } from "src/reward/reward.entity";
 import { Update } from "src/update/update.entity";
 import { User } from "src/user/user.entity";
@@ -12,7 +13,7 @@ export class Project {
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number
 
-    @Column()
+    @ManyToOne(() => User, (user) => user.project)
     userCreator: User
 
     @Column()
@@ -41,6 +42,9 @@ export class Project {
 
     @ManyToOne(() => Category, (category) => category.project)
     subCategory: Category
+
+    @OneToMany(() => Favorite, (favorite) => favorite.project)
+    favorites: Favorite[]
 
     @Column()
     createdAt: Date
