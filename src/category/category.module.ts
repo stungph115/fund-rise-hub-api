@@ -6,9 +6,10 @@ import { PassportModule } from '@nestjs/passport';
 import { env } from 'env';
 import { JwtModule } from '@nestjs/jwt';
 import { Category } from './category.entity';
+import { SubCategory } from 'src/sub-category/sub-category.entity';
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Category]),
+    TypeOrmModule.forFeature([Category, SubCategory]),
     PassportModule.register({
       defaultStrategy: 'jwt'
     }),

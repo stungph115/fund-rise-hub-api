@@ -20,15 +20,14 @@ export class UserController {
 
     @Get('/:id')
     @UseGuards(JwtAuthGuard)
-    @SetMetadata('userId', 'userId')
-    @SetMetadata('role', 'user')
-    getThisUser(@Param('id', ParseIntPipe) id: number, @Body() userId: number) {
-        return this.userService.getUser()
+    /* @SetMetadata('role', 'user') */
+    getThisUser(@Param('id', ParseIntPipe) id: number) {
+        return this.userService.getUser(id)
     }
 
     @Post()
     addUser(@Body() addUserDto: any) {
-        return this.userService.addUser()
+        return this.userService.addUser(addUserDto)
     }
 
     @Patch(':id')
@@ -37,9 +36,8 @@ export class UserController {
     updateUser(
         @Param('id', ParseIntPipe) id: number,
         @Body() updateUserDto: any,
-        @Body() userId: number
     ) {
-        return this.userService.updateUser()
+        return this.userService.updateUser(id, updateUserDto)
     }
 
     @Delete(':id')
@@ -54,7 +52,7 @@ export class UserController {
         @Body() signInUserParams: any,
         @Res({ passthrough: true }) response: Response
     ) {
-        return this.userService.signInUser()
+        return this.userService.signInUser(signInUserParams, response)
     }
 
     @Post('verifSignIn')
@@ -62,14 +60,14 @@ export class UserController {
         @Body() signInUserParams: any,
         @Res({ passthrough: true }) response: Response
     ) {
-        return this.userService.verifSignInUser()
+        return this.userService.verifSignInUser(signInUserParams, response)
     }
 
     @Post('signOut')
     signOutUser(
         @Res({ passthrough: true }) response: Response
     ) {
-        return this.userService.signOutUser()
+        return this.userService.signOutUser(response)
     }
 
     @Post('forgot-password')

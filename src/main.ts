@@ -9,7 +9,7 @@ const express = require('express')
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(env.BACKEND_PORT);
+
   app.enableCors({
     origin: 'http://localhost:3000',
     credentials: true,
@@ -27,5 +27,6 @@ async function bootstrap() {
   app.use(cookieParser())
   app.use(bodyParser.json({ limit: '100mb' }))
   app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }))
+  await app.listen(env.BACKEND_PORT);
 }
 bootstrap();

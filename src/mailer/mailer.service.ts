@@ -2,16 +2,14 @@ import { Injectable } from '@nestjs/common';
 const nodemailer = require("nodemailer")
 
 const transporter = nodemailer.createTransport({
-    host: "",
-    port: '',
+    service: "Gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
-        user: "",
-        pass: ""
+        user: "rominage.115@mail.com",
+        pass: "nyjc ygog ngia geqa"
     },
-    secure: false,
-    tls: {
-        rejectUnauthorized: false,
-    }
 })
 const errorAlertTemplateHtml = `
     <p>An error happened with the following message : #message#</p>

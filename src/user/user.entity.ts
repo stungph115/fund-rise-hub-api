@@ -27,6 +27,9 @@ export class User {
     @Column()
     phone: string
 
+    @Column({ nullable: true })
+    photo: string
+
     @ManyToOne(() => Role, (role) => role.users)
     role: Role
 

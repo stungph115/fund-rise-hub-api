@@ -2,7 +2,7 @@ import { Category } from "src/category/category.entity";
 import { Project } from "src/project/project.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: 'subcateogry' })
+@Entity({ name: 'subcategory' })
 export class SubCategory {
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number
