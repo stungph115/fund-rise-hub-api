@@ -4,6 +4,7 @@ import { env } from 'env';
 import { Server } from 'socket.io'
 import * as cookieParser from 'cookie-parser'
 import * as bodyParser from 'body-parser'
+import { UserService } from './user/user.service';
 
 const express = require('express')
 
@@ -24,6 +25,9 @@ async function bootstrap() {
       origin: ["http://localhost:3000"],
     },
   })
+  const userService = app.get(UserService)
+  userService.setSocketServer(io)
+
   app.use(cookieParser())
   app.use(bodyParser.json({ limit: '100mb' }))
   app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }))

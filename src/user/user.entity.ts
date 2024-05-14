@@ -1,5 +1,6 @@
 import { AddonsEarned } from "src/addons-earned/addons-earned.entity";
 import { Favorite } from "src/favorite/favorite.entity";
+import { Follow } from "src/follow/follow.entity";
 import { Project } from "src/project/project.entity";
 import { RewardEarned } from "src/reward-earned/reward-earned.entity";
 import { Role } from "src/role/role.entity";
@@ -30,6 +31,9 @@ export class User {
     @Column({ nullable: true })
     photo: string
 
+    @Column({ nullable: true })
+    stripeId: string
+
     @ManyToOne(() => Role, (role) => role.users)
     role: Role
 
@@ -47,6 +51,12 @@ export class User {
 
     @OneToMany(() => Favorite, (favorite) => favorite.user)
     favorites: Favorite[]
+
+    @OneToMany(() => Follow, (follow) => follow.following)
+    following: Follow[]
+
+    @OneToMany(() => Follow, (follow) => follow.follower)
+    follower: Follow[]
 
     @Column()
     createdAt: Date

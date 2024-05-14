@@ -20,14 +20,12 @@ export class FileController {
         }),
     }))
     uploadFile(@UploadedFile() file: Express.Multer.File) {
-        console.log(file);
         return file.filename
     }
 
     @Get(':filename')
     async serveImage(@Param('filename') filename: string, @Res() res: Response) {
         const imagePath = path.join(__dirname, '..', '..', '..', 'src', 'public', filename); // Adjust the path as needed
-        console.log(imagePath)
         if (fs.existsSync(imagePath)) {
             return res.sendFile(imagePath);
         } else {

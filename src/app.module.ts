@@ -42,6 +42,9 @@ import { CategoryModule } from './category/category.module';
 import { SubCategoryModule } from './sub-category/sub-category.module';
 import { Category } from './category/category.entity';
 import { SubCategory } from './sub-category/sub-category.entity';
+import { CardPaymentModule } from './card-payment/card-payment.module';
+import { FollowModule } from './follow/follow.module';
+import { Follow } from './follow/follow.entity';
 
 @Module({
   imports: [
@@ -70,6 +73,7 @@ import { SubCategory } from './sub-category/sub-category.entity';
         Addons,
         Category,
         SubCategory,
+        Follow
 
       ],
       synchronize: true,
@@ -96,6 +100,8 @@ import { SubCategory } from './sub-category/sub-category.entity';
     FileChatModule,
     CategoryModule,
     SubCategoryModule,
+    CardPaymentModule,
+    FollowModule,
   ],
   controllers: [AppController],
   providers: [

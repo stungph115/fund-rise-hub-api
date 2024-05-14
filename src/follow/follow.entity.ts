@@ -1,17 +1,17 @@
 import { User } from "src/user/user.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({ name: 'conversation' })
-export class Conversation {
+@Entity({ name: 'follow' })
+export class Follow {
     @PrimaryGeneratedColumn({ type: 'bigint' })
     id: number
+
     @ManyToOne(() => User, user => user.following)
-    user1: User
+    following: User
 
     @ManyToOne(() => User, user => user.follower)
-    user2: User
+    follower: User
 
     @Column()
     createdAt: Date
-
 }

@@ -7,6 +7,7 @@ import { Role } from 'src/role/role.entity';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { env } from 'env';
+import { MailerService } from 'src/mailer/mailer.service';
 
 @Module({
   imports: [
@@ -22,6 +23,6 @@ import { env } from 'env';
     }),
   ],
   controllers: [UserController],
-  providers: [UserService]
+  providers: [UserService, MailerService]
 })
 export class UserModule { }

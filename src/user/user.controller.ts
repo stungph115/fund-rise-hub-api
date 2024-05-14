@@ -71,12 +71,16 @@ export class UserController {
     }
 
     @Post('forgot-password')
-    requestPasswordReset(@Body('email') email: string) {
-        return this.userService.requestResetPassword()
+    requestPasswordReset(@Body() email: any) {
+        return this.userService.requestResetPassword(email.email)
     }
 
     @Post('reset-password')
     async resetPassword(@Body() params: any) {
-        await this.userService.resetPassword()
+        await this.userService.resetPassword(params)
+    }
+    @Post('change-password')
+    async changePassword(@Body() params: any) {
+        await this.userService.changePassword(params)
     }
 }
