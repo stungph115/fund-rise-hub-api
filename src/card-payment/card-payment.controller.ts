@@ -15,7 +15,6 @@ export class CardPaymentController {
     @Post('attach')
     @UseGuards(JwtAuthGuard)
     attachCardToCustomer(@Body() params: any) {
-        console.log("here")
         return this.cardPaymentService.attachCardToCustomerStripe(params)
     }
 

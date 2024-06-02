@@ -79,7 +79,6 @@ export class UserService {
 
 
     async updateUser(userId: number, updateUserDto: any): Promise<string> {
-        console.log(updateUserDto)
         const user = await this.userRepository.findOneBy({ id: userId });
 
         if (!user) {
@@ -182,7 +181,6 @@ export class UserService {
             }
 
             /* response.cookie('tokenJWT', signInUserParams.tokenJWT, { httpOnly: true }); */
-            console.log("token verfied")
             return 'TOKENJWT_VERIFIED';
         } catch (err) {
             if (err.message == 'jwt expired') {
@@ -199,7 +197,6 @@ export class UserService {
     }
 
     async requestResetPassword(email: string) {
-        console.log(email)
         const user = await this.userRepository.findOne({
             where: {
                 email: email

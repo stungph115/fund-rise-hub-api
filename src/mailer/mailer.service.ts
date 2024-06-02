@@ -51,7 +51,6 @@ export class MailerService {
                 html,
             }
             await transporter.sendMail(params)
-            console.log("here")
         } catch (err) {
             console.log(err)
         }
