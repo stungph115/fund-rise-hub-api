@@ -1,8 +1,8 @@
 # compiled output
 /dist
 /node_modules
-/public
-
+src/public/*
+!src/public
 # Logs
 logs
 *.log

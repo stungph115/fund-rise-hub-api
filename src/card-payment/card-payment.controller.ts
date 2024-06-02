@@ -25,6 +25,7 @@ export class CardPaymentController {
     }
 
     @Delete(':paymentMethod')
+    @UseGuards(JwtAuthGuard)
     deletePaymentMethod(
         @Param('paymentMethod') paymentMethod: string,
     ) {
