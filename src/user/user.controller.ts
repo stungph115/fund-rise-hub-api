@@ -8,19 +8,20 @@ import { Response } from 'express'
 
 export class UserController {
     constructor(private userService: UserService) { }
-
-    @Get('list')
+    //admin
+    @Get('list/:search')
     @UseGuards(JwtAuthGuard)
-    @SetMetadata('role', 'admin')
-    @SetMetadata('setRole', 'role')
-    @SetMetadata('userId', 'userId')
-    getUsersList(@Body() role) {
+    getUsersList(@Param('search') search: string) {
+        return this.userService.findUser(search)
+    }
+    //find users
+    @Post('find')
+    getUsersListFound(@Body() role) {
         return this.userService.getUsersList()
     }
-
+    //profile
     @Get('/:id')
     @UseGuards(JwtAuthGuard)
-    /* @SetMetadata('role', 'user') */
     getThisUser(@Param('id', ParseIntPipe) id: number) {
         return this.userService.getUser(id)
     }
@@ -32,17 +33,15 @@ export class UserController {
 
     @Patch(':id')
     @UseGuards(JwtAuthGuard)
-    @SetMetadata('userId', 'userId')
     updateUser(
         @Param('id', ParseIntPipe) id: number,
         @Body() updateUserDto: any,
     ) {
         return this.userService.updateUser(id, updateUserDto)
     }
-
+    //admin
     @Delete(':id')
     @UseGuards(JwtAuthGuard)
-    @SetMetadata('userId', 'userId')
     deleteUser(@Param('id', ParseIntPipe) id: number, @Body() userId: number) {
         return this.userService.deleteUser()
     }

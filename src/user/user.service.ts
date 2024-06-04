@@ -254,4 +254,18 @@ export class UserService {
             throw new HttpException("USER_UPDATED", HttpStatus.OK)
         }
     }
+
+    async findUser(search: string) {
+        const [firstName, lastName] = search.split(' ');
+        // Construct the query to find users matching either first name or last name
+        const users = await this.userRepository
+            .createQueryBuilder('user')
+            .select(['user.id', 'user.firstname', 'user.lastname', 'user.photo'])
+            .where('user.firstname LIKE :firstName', { firstName: `%${firstName}%` })
+            .orWhere('user.lastname LIKE :lastName', { lastName: `%${lastName}%` })
+            .take(3)
+            .getMany();
+
+        return users;
+    }
 }
