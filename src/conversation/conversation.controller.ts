@@ -25,9 +25,9 @@ export class ConversationController {
         return this.conversationService.getConversationsForUser(userId)
     }
 
-    @Get('count-message-unread')
+    @Post('count-message-unread')
     @UseGuards(JwtAuthGuard)
-    countChatMessageUnread(@Body() userId: any) {
+    async countChatMessageUnread(@Body() userId: any) {
         return this.conversationService.countChatMessageUnread(userId.userId)
     }
 }

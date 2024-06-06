@@ -8,6 +8,7 @@ import { RewardEarned } from "src/reward-earned/reward-earned.entity";
 import { Role } from "src/role/role.entity";
 import { Update } from "src/update/update.entity";
 import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Socket } from "./socket.entity";
 
 @Entity({ name: 'user' })
 export class User {
@@ -71,4 +72,7 @@ export class User {
 
     @Column()
     updatedAt: Date
+
+    @OneToMany(() => Socket, (socket) => socket.user)
+    socket: Socket[]
 }

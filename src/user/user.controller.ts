@@ -64,9 +64,10 @@ export class UserController {
 
     @Post('signOut')
     signOutUser(
+        @Body() userId: any,
         @Res({ passthrough: true }) response: Response
     ) {
-        return this.userService.signOutUser(response)
+        return this.userService.signOutUser(userId.userId, response)
     }
 
     @Post('forgot-password')
@@ -81,5 +82,12 @@ export class UserController {
     @Post('change-password')
     async changePassword(@Body() params: any) {
         await this.userService.changePassword(params)
+    }
+
+    //get status online 
+    @Get('status/:id')
+    @UseGuards(JwtAuthGuard)
+    getUserActive(@Param('id', ParseIntPipe) id: number) {
+        return this.userService.getUserActive(id)
     }
 }

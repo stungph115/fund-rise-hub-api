@@ -86,7 +86,6 @@ export class ConversationService {
         return filteredConversations
     }
     async countChatMessageUnread(userId: number) {
-
         const conversations = await this.conversationRepository.find({
             where: [
                 { participants: { id: userId } }
@@ -110,7 +109,7 @@ export class ConversationService {
                 }
             }
         }
-
+        console.log(unreadMessageCount + undreadFileCount)
         return {
             statusCode: 200,
             message: unreadMessageCount + undreadFileCount

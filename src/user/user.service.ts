@@ -10,6 +10,7 @@ import { Response } from 'express'
 import Stripe from 'stripe';
 import { MailerService } from 'src/mailer/mailer.service'
 import { Server } from 'socket.io'
+import { Socket } from './socket.entity'
 
 @Injectable()
 export class UserService {
@@ -18,6 +19,8 @@ export class UserService {
     constructor(
         @InjectRepository(User) private userRepository: Repository<User>,
         @InjectRepository(Role) private roleRepository: Repository<Role>,
+        @InjectRepository(Socket) private socketRepository: Repository<Socket>,
+
         private jwtService: JwtService,
         private mailerService: MailerService,
     ) {
@@ -27,7 +30,31 @@ export class UserService {
     }
     setSocketServer(socketServer: Server) {
         this.socketServer = socketServer
+        this.socketServer.on('connection', (socket) => {
+            console.log('Client connected:', socket.id)
+            // Listen for events from the frontend
+            socket.on("user-connect", (userId) => {
+                //add socket 
+                if (userId) {
+                    this.addSocketId(socket.id, userId)
+                }
+            })
+            socket.on("clear-socket", (userId) => {
+                this.clearSocket(userId)
+            })
+
+            socket.on("remove-socket", () => {
+                this.removeSocketId(socket.id)
+            })
+
+            socket.on('disconnect', () => {
+                console.log('Client disconnected:', socket.id)
+                this.removeSocketId(socket.id)
+            })
+        })
     }
+
+
     async getUsersList() {
 
     }
@@ -191,8 +218,9 @@ export class UserService {
         }
     }
 
-    async signOutUser(response: Response) {
+    async signOutUser(userId: number, response: Response) {
         response.clearCookie('tokenJWT')
+        this.clearSocket(userId)
         throw new HttpException("DISCONNECTED", HttpStatus.OK)
     }
 
@@ -267,5 +295,76 @@ export class UserService {
             .getMany();
 
         return users;
+    }
+
+    //manage user status on-offline
+    private async addSocketId(socketId: string, userId: number) {
+        const user = await this.userRepository.findOneBy({ id: userId })
+        if (!user) {
+            throw new HttpException("USER_NOT_FOUND", HttpStatus.UNPROCESSABLE_ENTITY)
+        }
+
+        const newSocket = this.socketRepository.create({
+            socketId: socketId,
+            user: user
+        })
+        const socketSave = await this.socketRepository.save(newSocket)
+        if (!socketSave) {
+            throw new HttpException("ERROR_SOCKET_CREATION", HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        this.socketServer.emit("user-status")
+        return { statusCode: 200 }
+    }
+
+    private async removeSocketId(socketId: string) {
+        const socket = await this.socketRepository.findOneBy({ socketId: socketId })
+        if (!socket) {
+            return { statusCode: 200 }
+        }
+        const socketDelete = await this.socketRepository.delete({ socketId })
+        if (!socketDelete) {
+            throw new HttpException("ERROR_SOCKET_DELETING", HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        this.socketServer.emit("user-status")
+
+        return { statusCode: 200 }
+    }
+
+    async clearSocket(userId: number) {
+        const user = await this.userRepository.findOneBy({ id: userId })
+        if (!user) {
+            throw new HttpException("USER_NOT_FOUND", HttpStatus.UNPROCESSABLE_ENTITY)
+        }
+        const socketClear = await this.socketRepository.delete({ user: user })
+        if (!socketClear) {
+            throw new HttpException("ERROR_SOCKET_CLEAR", HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+        this.socketServer.emit("user-status")
+        return { statusCode: 200 }
+    }
+
+    async getUserActive(userId: number) {
+
+        const user = await this.userRepository.findOne({
+            where: {
+                id: userId
+            },
+            relations: {
+                socket: true
+            },
+            order: {
+                firstname: 'ASC'
+            },
+        })
+        if (user.socket.length > 0) {
+            return {
+                "active": true
+            };
+        } else {
+            return {
+                "active": false
+            };
+        }
+
     }
 }

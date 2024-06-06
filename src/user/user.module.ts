@@ -8,10 +8,11 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { env } from 'env';
 import { MailerService } from 'src/mailer/mailer.service';
+import { Socket } from './socket.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Role]),
+    TypeOrmModule.forFeature([User, Role, Socket]),
     PassportModule.register({
       defaultStrategy: 'jwt'
     }),

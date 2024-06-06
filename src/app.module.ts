@@ -46,6 +46,7 @@ import { CardPaymentModule } from './card-payment/card-payment.module';
 import { FollowModule } from './follow/follow.module';
 import { Follow } from './follow/follow.entity';
 import { FileChat } from './file-chat/file-chat.entity';
+import { Socket } from './user/socket.entity';
 
 @Module({
   imports: [
@@ -75,7 +76,8 @@ import { FileChat } from './file-chat/file-chat.entity';
         Category,
         SubCategory,
         Follow,
-        FileChat
+        FileChat,
+        Socket
 
       ],
       synchronize: true,
