@@ -16,7 +16,7 @@ import { Project } from './project.entity';
     JwtModule.register({
       secret: env.USER_JWT_KEY,
       signOptions: {
-        expiresIn: "2h",
+        expiresIn: "48h",
       }
     }),
   ],

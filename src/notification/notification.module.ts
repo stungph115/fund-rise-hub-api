@@ -5,21 +5,23 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { env } from 'env';
 import { JwtModule } from '@nestjs/jwt';
-import { Notification } from './notification.enity';
+import { Notification } from './notification.entity';
+import { User } from 'src/user/user.entity';
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Notification]),
+    TypeOrmModule.forFeature([User, Notification]),
     PassportModule.register({
       defaultStrategy: 'jwt'
     }),
     JwtModule.register({
       secret: env.USER_JWT_KEY,
       signOptions: {
-        expiresIn: "2h",
+        expiresIn: "48h",
       }
     }),
   ],
   providers: [NotificationService],
-  controllers: [NotificationController]
+  controllers: [NotificationController],
+  exports: [NotificationService]
 })
 export class NotificationModule { }

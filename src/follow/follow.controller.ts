@@ -9,7 +9,6 @@ export class FollowController {
     @Post()
     @UseGuards(JwtAuthGuard)
     newFollow(@Body() params: any) {
-        console.log('here', params)
         return this.followService.newFollow(params)
     }
     @Post('unfollow')

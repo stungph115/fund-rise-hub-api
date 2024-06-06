@@ -14,14 +14,20 @@ export class ConversationController {
 
     @Get('check/:userId1/:userId2')
     @UseGuards(JwtAuthGuard)
-    async checkConversation(@Param('userId1') userId1: number, @Param('userId2') userId2: number): Promise<{ exists: boolean }> {
+    async checkConversation(@Param('userId1') userId1: number, @Param('userId2') userId2: number) {
         const exists = await this.conversationService.checkConversation(userId1, userId2);
         return { exists };
     }
 
-    @Get('conversation/:userId')
+    @Get('/:userId')
     @UseGuards(JwtAuthGuard)
     async getConversationUser(@Param('userId') userId: number) {
         return this.conversationService.getConversationsForUser(userId)
+    }
+
+    @Get('count-message-unread')
+    @UseGuards(JwtAuthGuard)
+    countChatMessageUnread(@Body() userId: any) {
+        return this.conversationService.countChatMessageUnread(userId.userId)
     }
 }

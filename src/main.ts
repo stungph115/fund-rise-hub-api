@@ -5,6 +5,10 @@ import { Server } from 'socket.io'
 import * as cookieParser from 'cookie-parser'
 import * as bodyParser from 'body-parser'
 import { UserService } from './user/user.service';
+import { ConversationService } from './conversation/conversation.service';
+import { NotificationService } from './notification/notification.service';
+import { FileChatService } from './file-chat/file-chat.service';
+import { MessageService } from './message/message.service';
 
 const express = require('express')
 
@@ -26,6 +30,15 @@ async function bootstrap() {
     },
   })
   const userService = app.get(UserService)
+  const messageService = app.get(MessageService)
+  const fileChatService = app.get(FileChatService)
+  const notificationService = app.get(NotificationService)
+  const conversationService = app.get(ConversationService)
+
+  notificationService.setSocketServer(io)
+  messageService.setSocketServer(io)
+  fileChatService.setSocketServer(io)
+  /*  conversationService.setSocketServer(io) */
   userService.setSocketServer(io)
 
   app.use(cookieParser())

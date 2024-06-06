@@ -16,7 +16,7 @@ import { Favorite } from './favorite.entity';
     JwtModule.register({
       secret: env.USER_JWT_KEY,
       signOptions: {
-        expiresIn: "2h",
+        expiresIn: "48h",
       }
     }),
   ],

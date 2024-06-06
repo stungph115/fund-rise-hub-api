@@ -1,3 +1,4 @@
+import { FileChat } from "src/file-chat/file-chat.entity";
 import { Message } from "src/message/message.entity";
 import { User } from "src/user/user.entity";
 import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -16,5 +17,8 @@ export class Conversation {
 
     @Column()
     createdAt: Date
+
+    @OneToMany(() => FileChat, (file) => file.conversation)
+    file: FileChat[]
 
 }

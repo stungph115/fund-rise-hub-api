@@ -27,7 +27,7 @@ import { Role } from './role/role.entity';
 import { RewardEarned } from './reward-earned/reward-earned.entity';
 import { Reward } from './reward/reward.entity';
 import { Project } from './project/project.entity';
-import { Notification } from './notification/notification.enity';
+import { Notification } from './notification/notification.entity';
 import { Message } from './message/message.entity';
 import { Favorite } from './favorite/favorite.entity';
 import { FaQ } from './faq/faq.entity';
@@ -45,6 +45,7 @@ import { SubCategory } from './sub-category/sub-category.entity';
 import { CardPaymentModule } from './card-payment/card-payment.module';
 import { FollowModule } from './follow/follow.module';
 import { Follow } from './follow/follow.entity';
+import { FileChat } from './file-chat/file-chat.entity';
 
 @Module({
   imports: [
@@ -73,7 +74,8 @@ import { Follow } from './follow/follow.entity';
         Addons,
         Category,
         SubCategory,
-        Follow
+        Follow,
+        FileChat
 
       ],
       synchronize: true,

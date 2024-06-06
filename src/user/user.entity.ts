@@ -1,6 +1,8 @@
 import { AddonsEarned } from "src/addons-earned/addons-earned.entity";
 import { Favorite } from "src/favorite/favorite.entity";
 import { Follow } from "src/follow/follow.entity";
+import { Message } from "src/message/message.entity";
+import { Notification } from "src/notification/notification.entity";
 import { Project } from "src/project/project.entity";
 import { RewardEarned } from "src/reward-earned/reward-earned.entity";
 import { Role } from "src/role/role.entity";
@@ -57,6 +59,12 @@ export class User {
 
     @OneToMany(() => Follow, (follow) => follow.follower)
     follower: Follow[]
+
+    @OneToMany(() => Message, (messages) => messages.user)
+    messages: Message[]
+
+    @OneToMany(() => Notification, (notification) => notification.user)
+    notification: Notification[]
 
     @Column()
     createdAt: Date
