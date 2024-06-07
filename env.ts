@@ -5,6 +5,7 @@ export const env = {
     DATABASE_PASS: '',
     DATABASE_HOST: 'localhost',
     BASE_URL: 'http://localhost:3000/',
+    NETWORK_URL: 'http://192.168.1.154:3000',
     DATABASE_NAME: 'fundrisehub',
     USER_JWT_KEY: 'Xk1sOT8a94HDd55jV86mL',
     USER_PASSWORD_KEY: '89mq4ofYkVN1VbeO89Zt5',

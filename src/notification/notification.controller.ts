@@ -6,15 +6,16 @@ import { JwtAuthGuard } from 'src/auth/auth.jwtGuard';
 export class NotificationController {
     constructor(private notificationService: NotificationService) { }
 
-    @Get()
+    @Get(':id')
     @UseGuards(JwtAuthGuard)
-    getNotification(@Body() body: any) {
-        return this.notificationService.getNotification(body)
+    getNotification(@Param('id', ParseIntPipe) userId: number) {
+        console.log("notification", userId)
+        return this.notificationService.getNotification(userId)
     }
 
-    @Get('count-unread')
+    @Get('count-unread/:id')
     @UseGuards(JwtAuthGuard)
-    getNumberUnreadNotification(@Body() userId: number) {
+    getNumberUnreadNotification(@Param('id', ParseIntPipe) userId: number) {
         return this.notificationService.getNumberUnreadNotification(userId)
     }
 

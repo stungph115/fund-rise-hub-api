@@ -16,7 +16,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', env.NETWORK_URL],
     credentials: true,
   })
   app.use(express.json(
@@ -26,19 +26,17 @@ async function bootstrap() {
   const server = app.getHttpServer()
   const io = new Server(server, {
     cors: {
-      origin: ["http://localhost:3000"],
+      origin: ["http://localhost:3000", env.NETWORK_URL],
     },
   })
   const userService = app.get(UserService)
   const messageService = app.get(MessageService)
   const fileChatService = app.get(FileChatService)
   const notificationService = app.get(NotificationService)
-  const conversationService = app.get(ConversationService)
 
   notificationService.setSocketServer(io)
   messageService.setSocketServer(io)
   fileChatService.setSocketServer(io)
-  /*  conversationService.setSocketServer(io) */
   userService.setSocketServer(io)
 
   app.use(cookieParser())

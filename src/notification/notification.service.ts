@@ -15,8 +15,8 @@ export class NotificationService {
     setSocketServer(socketServer: Server) {
         this.socketServer = socketServer
     }
-    async getNumberUnreadNotification(userId: any) {
-        const user = await this.userRepository.findOneBy({ id: userId.userId })
+    async getNumberUnreadNotification(userId: number) {
+        const user = await this.userRepository.findOneBy({ id: userId })
         if (!user) {
             throw new HttpException("USER_NOT_FOUND", HttpStatus.UNPROCESSABLE_ENTITY)
         }
@@ -29,8 +29,8 @@ export class NotificationService {
         }
     }
 
-    async getNotification(body: any) {
-        const user = await this.userRepository.findOneBy({ id: body.userId })
+    async getNotification(userId: number) {
+        const user = await this.userRepository.findOneBy({ id: userId })
         if (!user) {
             throw new HttpException("USER_NOT_FOUND", HttpStatus.UNPROCESSABLE_ENTITY)
         }
