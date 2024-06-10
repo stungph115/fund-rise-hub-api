@@ -91,8 +91,8 @@ export class NotificationService {
         }
     }
 
-    async setAllNotificationRead(userId: any) {
-        const user = await this.userRepository.findOneBy({ id: userId.userId })
+    async setAllNotificationRead(userId: number) {
+        const user = await this.userRepository.findOneBy({ id: userId })
         if (!user) {
             throw new HttpException("USER_NOT_FOUND", HttpStatus.UNPROCESSABLE_ENTITY)
         }

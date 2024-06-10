@@ -9,7 +9,6 @@ export class NotificationController {
     @Get(':id')
     @UseGuards(JwtAuthGuard)
     getNotification(@Param('id', ParseIntPipe) userId: number) {
-        console.log("notification", userId)
         return this.notificationService.getNotification(userId)
     }
 
@@ -34,7 +33,7 @@ export class NotificationController {
     @Post('all-read')
     @UseGuards(JwtAuthGuard)
     setAllNotificationRead(@Body() userId: any) {
-        return this.notificationService.setAllNotificationRead(userId)
+        return this.notificationService.setAllNotificationRead(userId.userId)
     }
 
     @Delete(':id')

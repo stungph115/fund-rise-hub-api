@@ -1,16 +1,18 @@
 import { Module } from '@nestjs/common';
-import { RewardEarnedController } from './reward-earned.controller';
-import { RewardEarnedService } from './reward-earned.service';
+import { InvestController } from './invest.controller';
+import { InvestService } from './invest.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
-import { env } from 'env';
 import { JwtModule } from '@nestjs/jwt';
-import { RewardEarned } from './reward-earned.entity';
+import { env } from 'env';
+import { Payment } from 'src/payment/payment.entity';
+import { Invest } from './invest.entity';
 import { User } from 'src/user/user.entity';
-import { Reward } from 'src/reward/reward.entity';
+import { Project } from 'src/project/project.entity';
+
 @Module({
   imports: [
-    TypeOrmModule.forFeature([RewardEarned, User, Reward]),
+    TypeOrmModule.forFeature([Payment, Invest, User, Project]),
     PassportModule.register({
       defaultStrategy: 'jwt'
     }),
@@ -21,7 +23,7 @@ import { Reward } from 'src/reward/reward.entity';
       }
     }),
   ],
-  controllers: [RewardEarnedController],
-  providers: [RewardEarnedService]
+  controllers: [InvestController],
+  providers: [InvestService]
 })
-export class RewardEarnedModule { }
+export class InvestModule { }

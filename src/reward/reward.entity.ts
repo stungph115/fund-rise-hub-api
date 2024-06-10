@@ -1,4 +1,3 @@
-import { Addons } from "src/addons/addons.entity";
 import { Project } from "src/project/project.entity";
 import { RewardEarned } from "src/reward-earned/reward-earned.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -25,9 +24,6 @@ export class Reward {
 
     @OneToMany(() => RewardEarned, (rewardEarned) => rewardEarned.reward)
     rewardEarned: RewardEarned[]
-
-    @OneToMany(() => Addons, (addons) => addons.reward)
-    addons: Addons[]
 
     @Column()
     createdAt: Date

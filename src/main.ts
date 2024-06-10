@@ -9,12 +9,13 @@ import { ConversationService } from './conversation/conversation.service';
 import { NotificationService } from './notification/notification.service';
 import { FileChatService } from './file-chat/file-chat.service';
 import { MessageService } from './message/message.service';
+import { PaymentService } from './payment/payment.service';
 
 const express = require('express')
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
+  app.use('/webhook', bodyParser.raw({ type: 'application/json' }));
   app.enableCors({
     origin: ['http://localhost:3000', env.NETWORK_URL],
     credentials: true,
@@ -33,11 +34,13 @@ async function bootstrap() {
   const messageService = app.get(MessageService)
   const fileChatService = app.get(FileChatService)
   const notificationService = app.get(NotificationService)
+  const paymentService = app.get(PaymentService)
 
   notificationService.setSocketServer(io)
   messageService.setSocketServer(io)
   fileChatService.setSocketServer(io)
   userService.setSocketServer(io)
+  paymentService.setSocketServer(io)
 
   app.use(cookieParser())
   app.use(bodyParser.json({ limit: '100mb' }))

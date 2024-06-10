@@ -86,8 +86,7 @@ export class CardPaymentService {
     async deleteCard(paymentMethod: string) {
         try {
             const deleteCard = await this.stripe.paymentMethods.detach(paymentMethod)
-/*             console.log(deleteCard)
- */            return 200
+            return 200
         } catch (error) {
             console.log(error)
             throw new HttpException("STRIPE_ERROR_" + error.raw.code, HttpStatus.UNPROCESSABLE_ENTITY)

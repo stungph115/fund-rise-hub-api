@@ -16,9 +16,7 @@ import { UpdateModule } from './update/update.module';
 import { CommentModule } from './comment/comment.module';
 import { FaqModule } from './faq/faq.module';
 import { RewardModule } from './reward/reward.module';
-import { AddonsModule } from './addons/addons.module';
 import { RewardEarnedModule } from './reward-earned/reward-earned.module';
-import { AddonsEarnedModule } from './addons-earned/addons-earned.module';
 import { NotificationModule } from './notification/notification.module';
 import { ConversationModule } from './conversation/conversation.module';
 import { User } from './user/user.entity';
@@ -34,8 +32,6 @@ import { FaQ } from './faq/faq.entity';
 import { Conversation } from './conversation/conversation.entity';
 import { Comment } from './comment/comment.entity';
 import { Campaign } from './campaign/campaign.entity';
-import { AddonsEarned } from './addons-earned/addons-earned.entity';
-import { Addons } from './addons/addons.entity';
 import { FileModule } from './file/file.module';
 import { FileChatModule } from './file-chat/file-chat.module';
 import { CategoryModule } from './category/category.module';
@@ -47,6 +43,13 @@ import { FollowModule } from './follow/follow.module';
 import { Follow } from './follow/follow.entity';
 import { FileChat } from './file-chat/file-chat.entity';
 import { Socket } from './user/socket.entity';
+import { ProjectPhotos } from './project/projectPhotos.entity';
+import { InvestModule } from './invest/invest.module';
+import { Invest } from './invest/invest.entity';
+import { WebhookModule } from './webhook/webhook.module';
+import { Event } from './webhook/webhook.entity';
+import { PaymentModule } from './payment/payment.module';
+import { Payment } from './payment/payment.entity';
 
 @Module({
   imports: [
@@ -71,13 +74,15 @@ import { Socket } from './user/socket.entity';
         Conversation,
         Comment,
         Campaign,
-        AddonsEarned,
-        Addons,
+        ProjectPhotos,
         Category,
         SubCategory,
         Follow,
         FileChat,
-        Socket
+        Socket,
+        Invest,
+        Event,
+        Payment
 
       ],
       synchronize: true,
@@ -95,9 +100,7 @@ import { Socket } from './user/socket.entity';
     CommentModule,
     FaqModule,
     RewardModule,
-    AddonsModule,
     RewardEarnedModule,
-    AddonsEarnedModule,
     NotificationModule,
     ConversationModule,
     FileModule,
@@ -106,6 +109,9 @@ import { Socket } from './user/socket.entity';
     SubCategoryModule,
     CardPaymentModule,
     FollowModule,
+    InvestModule,
+    WebhookModule,
+    PaymentModule,
   ],
   controllers: [AppController],
   providers: [

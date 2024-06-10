@@ -109,7 +109,6 @@ export class ConversationService {
                 }
             }
         }
-        console.log(unreadMessageCount + undreadFileCount)
         return {
             statusCode: 200,
             message: unreadMessageCount + undreadFileCount

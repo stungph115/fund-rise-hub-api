@@ -11,5 +11,7 @@ export const env = {
     USER_PASSWORD_KEY: '89mq4ofYkVN1VbeO89Zt5',
     RESET_PASSWORD_KEY: 'JcKr9u4HS42sfGQebkhQR',
     STRIPE_API_SECRET_KEY: 'sk_test_51OUmh2BBo1z4BCbnG4NlJycO5DQTjMOckZxGBDi9SQBaUgUaJ02mdeSVafVcN16TiVqJYuRmaD1ROnOo4Dilu0UO00Rh0rQA0b',
-    APP_PASS: 'okqrqjjjdlwubgea'
+    APP_PASS: 'okqrqjjjdlwubgea',
+    WEBHOOK_SECRET_STRIPE: 'whsec_8f5875a56bf8120cafe1df16de0d62bbfd5799d551d1c1b9aaba8abc54c0bb5a'
+
 }

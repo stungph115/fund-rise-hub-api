@@ -1,4 +1,3 @@
-import { AddonsEarned } from "src/addons-earned/addons-earned.entity";
 import { Favorite } from "src/favorite/favorite.entity";
 import { Follow } from "src/follow/follow.entity";
 import { Message } from "src/message/message.entity";
@@ -9,6 +8,7 @@ import { Role } from "src/role/role.entity";
 import { Update } from "src/update/update.entity";
 import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Socket } from "./socket.entity";
+import { Invest } from "src/invest/invest.entity";
 
 @Entity({ name: 'user' })
 export class User {
@@ -43,9 +43,6 @@ export class User {
     @OneToMany(() => RewardEarned, (rewardEarned) => rewardEarned.user)
     rewardEarned: RewardEarned[]
 
-    @OneToMany(() => AddonsEarned, (addonsEarned) => addonsEarned.user)
-    addonsEarned: AddonsEarned[]
-
     @OneToMany(() => Update, (update) => update.userCreator)
     update: Update[]
 
@@ -72,6 +69,10 @@ export class User {
 
     @Column()
     updatedAt: Date
+
+    @OneToMany(() => Invest, (invest) => invest.user)
+    investments: Invest[];
+
 
     @OneToMany(() => Socket, (socket) => socket.user)
     socket: Socket[]

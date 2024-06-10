@@ -6,10 +6,12 @@ import { PassportModule } from '@nestjs/passport';
 import { env } from 'env';
 import { JwtModule } from '@nestjs/jwt';
 import { Favorite } from './favorite.entity';
+import { User } from 'src/user/user.entity';
+import { Project } from 'src/project/project.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Favorite]),
+    TypeOrmModule.forFeature([Favorite, User, Project]),
     PassportModule.register({
       defaultStrategy: 'jwt'
     }),
