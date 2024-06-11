@@ -9,6 +9,7 @@ import { Update } from "src/update/update.entity";
 import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Socket } from "./socket.entity";
 import { Invest } from "src/invest/invest.entity";
+import { Comment } from "src/comment/comment.entity";
 
 @Entity({ name: 'user' })
 export class User {
@@ -73,6 +74,8 @@ export class User {
     @OneToMany(() => Invest, (invest) => invest.user)
     investments: Invest[];
 
+    @OneToMany(() => Comment, (comment) => comment.sender)
+    comment: Comment[];
 
     @OneToMany(() => Socket, (socket) => socket.user)
     socket: Socket[]

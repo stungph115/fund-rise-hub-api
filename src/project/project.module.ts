@@ -12,10 +12,11 @@ import { Category } from 'src/category/category.entity';
 import { SubCategory } from 'src/sub-category/sub-category.entity';
 import { Reward } from 'src/reward/reward.entity';
 import { ProjectPhotos } from './projectPhotos.entity';
+import { Invest } from 'src/invest/invest.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Project, User, Campaign, Category, SubCategory, Reward, ProjectPhotos]),
+    TypeOrmModule.forFeature([Project, User, Campaign, Category, SubCategory, Reward, ProjectPhotos, Invest]),
     PassportModule.register({
       defaultStrategy: 'jwt'
     }),

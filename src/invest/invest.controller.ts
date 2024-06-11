@@ -6,7 +6,7 @@ import { JwtAuthGuard } from 'src/auth/auth.jwtGuard';
 export class InvestController {
     constructor(private investService: InvestService) { }
 
-    @Post('')
+    @Post()
     @UseGuards(JwtAuthGuard)
     createPayment(@Body() paymentData: any) {
         return this.investService.createInvest(paymentData)

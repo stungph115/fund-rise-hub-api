@@ -1,3 +1,5 @@
+import { IsOptional, IsString, IsNumber, IsBoolean, IsDateString } from 'class-validator';
+
 export interface CreateProjectDto {
     userId: number;
     goal: number;
@@ -33,7 +35,7 @@ export interface UpdateProjectDto {
     status?: string;
 }
 
-export interface FindProjectDto {
+/* export interface FindProjectDto {
     title?: string;
     descriptions?: string;
     userId?: number;
@@ -41,4 +43,59 @@ export interface FindProjectDto {
     deadline?: Date;
     categoryId?: number;
     subCategoryId?: number;
+}
+ */
+
+export class FindProjectDto {
+    @IsOptional()
+    @IsString()
+    title?: string;
+
+    @IsOptional()
+    @IsNumber()
+    userId?: number;
+
+    @IsOptional()
+    @IsNumber()
+    categoryId?: number;
+
+    @IsOptional()
+    @IsNumber()
+    subCategoryId?: number;
+
+    @IsOptional()
+    @IsBoolean()
+    topFavorites?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    topComments?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    reach90Percent?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    expireSoon?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    topLatest?: boolean;
+
+    @IsOptional()
+    @IsBoolean()
+    topPassedGoal?: boolean;
+
+    @IsOptional()
+    @IsString()
+    descriptions?: string;
+
+    @IsOptional()
+    @IsNumber()
+    goal?: number;
+
+    @IsOptional()
+    @IsDateString()
+    deadline?: string;
 }

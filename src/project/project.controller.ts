@@ -31,16 +31,16 @@ export class ProjectController {
         }
     }
 
-    @Get('discover')
-    async discoverProjects(@Query() queryParams: FindProjectDto) {
-        try {
-            const projects = await this.projectService.discoverProjects(queryParams);
-            return { projects };
-        } catch (error) {
-            return { error: 'Failed to discover projects' };
-        }
-    }
-
+    /*  @Get('discover')
+     async discoverProjects(@Query() queryParams: FindProjectDto) {
+         try {
+             const projects = await this.projectService.discoverProjects(queryParams);
+             return { projects };
+         } catch (error) {
+             return { error: 'Failed to discover projects' };
+         }
+     }
+  */
     @Post(':id/update')
     @UseGuards(JwtAuthGuard)
     async updateProject(@Param('id') projectId: number, @Body() updateParams: UpdateProjectDto) {
@@ -50,5 +50,29 @@ export class ProjectController {
         } catch (error) {
             return { error: 'Failed to update project' };
         }
+    }
+    @Post('discover-advanced')
+    async discoverProjectsAdvanced(@Body() queryParams: FindProjectDto) {
+        console.log("here", queryParams)
+        try {
+            const projects = await this.projectService.discoverProjectsAdvanced(queryParams);
+            return { projects };
+        } catch (error) {
+            return { error: 'Failed to discover projects' };
+        }
+    }
+
+    @Post('stat')
+    async getStats() {
+        console.log("here")
+
+        const fundedProjectCount = await this.projectService.getFundedProjectCount();
+        const fundedCount = await this.projectService.getFundedCount();
+        const pledgeCount = await this.projectService.getPledgeCount();
+        return {
+            fundedProjectCount,
+            fundedCount,
+            pledgeCount
+        };
     }
 }

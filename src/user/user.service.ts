@@ -60,7 +60,26 @@ export class UserService {
     }
 
     async getUser(id) {
-        const user = await this.userRepository.findOne({ where: { id: id }, relations: { follower: { following: true }, following: { follower: true, } } })
+        console.log(id)
+        const user = await this.userRepository.findOne({
+            where: { id: id },
+            relations: {
+                follower: { following: true },
+                following: { follower: true },
+                rewardEarned: {
+                    reward: true
+                },
+                investments: {
+                    project: { photos: true, userCreator: true }
+                },
+                project: {
+                    photos: true
+                },
+                favorites: {
+                    project: { photos: true, userCreator: true }
+                }
+            }
+        })
         if (!user) {
             throw new HttpException("USER_NOT_FOUND", HttpStatus.UNPROCESSABLE_ENTITY)
         }

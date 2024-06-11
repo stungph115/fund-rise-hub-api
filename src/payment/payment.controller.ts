@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { PaymentService } from './payment.service';
 import { JwtAuthGuard } from 'src/auth/auth.jwtGuard';
 
@@ -17,5 +17,11 @@ export class PaymentController {
     @UseGuards(JwtAuthGuard)
     getPayments() {
         return this.paymentService.getPayments()
+    }
+
+    @Get(':userId')
+    @UseGuards(JwtAuthGuard)
+    async getPaymentsUser(@Param('userId') userId: number) {
+        return this.paymentService.getPaymentsWithInvestments(userId);
     }
 }
