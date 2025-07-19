@@ -35,7 +35,7 @@ export class ProjectService {
         @InjectRepository(ProjectPhotos) private projectPhotosRepository: Repository<ProjectPhotos>,
         @InjectRepository(Invest) private investRepository: Repository<Invest>,
     ) { }
-    async addProject(params: CreateProjectDto) {
+    async addProject(params: any) {
         if (!params.userId || !params.goal || !params.deadline || !params.campaigns || !params.category || !params.descriptions || !params.title) {
             throw new HttpException('ERROR_PARAMS', HttpStatus.UNPROCESSABLE_ENTITY)
 
@@ -68,7 +68,9 @@ export class ProjectService {
             createdAt: new Date(),
             updatedAt: new Date(),
         })
+        console.log(newProject)
         const projectSaved = await this.projectRepository.save(newProject)
+
         if (!projectSaved) {
             throw new HttpException('PROJECT_NOT_SAVED', HttpStatus.INTERNAL_SERVER_ERROR)
 

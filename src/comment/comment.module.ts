@@ -6,10 +6,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { env } from 'env';
 import { JwtModule } from '@nestjs/jwt';
+import { User } from 'src/user/user.entity';
+import { Project } from 'src/project/project.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Comment]),
+    TypeOrmModule.forFeature([Comment, User, Project]),
     PassportModule.register({
       defaultStrategy: 'jwt'
     }),

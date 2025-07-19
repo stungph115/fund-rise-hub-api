@@ -20,7 +20,9 @@ export class WebhookService {
 
     async constructEvent(payload: any, sig: string): Promise<Stripe.Event> {
         try {
-            return this.stripe.webhooks.constructEvent(payload, sig, env.WEBHOOK_SECRET_STRIPE)
+            const event = this.stripe.webhooks.constructEvent(payload, sig, env.WEBHOOK_SECRET_STRIPE)
+            console.log("event: ", event)
+            return event
         } catch (err) {
             throw new Error(`Failed to construct event: ${err.message}`)
             //throw exception instead
@@ -47,6 +49,7 @@ export class WebhookService {
     async getEventDetail(idStripe) {
         try {
             const eventDetail = await this.stripe.events.retrieve(idStripe)
+            console.log("eventDetail", eventDetail)
             return eventDetail
         } catch (error) {
             console.log("STRIPE_ERROR_", error)

@@ -31,13 +31,14 @@ export class WebhookController {
                 type: event.type,
                 idStripe: event.id,
             }
+            console.log("event: ", event)
             this.stripeService.saveEvent(paramsSaveEvent)
             const newDate = moment().locale('fr').format('DD MMM YYYY [à] HH[h]mm')
             // Handle the event
             switch (event.type) {
                 case 'payment_intent.succeeded':
                     const paymentIntent = event.data.object
-                    /* console.log('Payment succeeded:', paymentIntent) */
+                    console.log('Payment succeeded:', paymentIntent)
                     /* this.commandeService.updateStatus('paid', paymentIntent.id) */
                     this.paymentService.updateStatus('paid', paymentIntent.id)
                     //send Mail payment succeed 
@@ -59,7 +60,7 @@ export class WebhookController {
                 case 'invoice.payment_succeeded':
                     const invoiceSucceeded = event.data.object
                     /* this.mailserService.sendMailSubscription(invoiceSucceeded.payment_intent, invoiceSucceeded.subscription, true, newDate) */
-                    /* console.log('Invoice payment succeeded:', invoiceSucceeded.id) */
+                    console.log('Invoice payment succeeded:', invoiceSucceeded.id)
                     break
 
                 case 'invoice.payment_failed':

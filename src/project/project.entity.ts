@@ -9,6 +9,7 @@ import { Update } from "src/update/update.entity";
 import { User } from "src/user/user.entity";
 import { ProjectPhotos } from "./projectPhotos.entity";
 import { Invest } from "src/invest/invest.entity";
+import { SubCategory } from "src/sub-category/sub-category.entity";
 
 @Entity({ name: 'project' })
 export class Project {
@@ -21,8 +22,8 @@ export class Project {
     @ManyToOne(() => Category, (category) => category.project)
     category: Category
 
-    @ManyToOne(() => Category, (category) => category.project)
-    subCategory: Category
+    @ManyToOne(() => SubCategory, (category) => category.project)
+    subCategory: SubCategory
 
     @Column()
     title: string

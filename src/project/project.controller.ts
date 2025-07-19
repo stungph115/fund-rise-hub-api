@@ -9,7 +9,7 @@ export class ProjectController {
 
     @Post()
     @UseGuards(JwtAuthGuard)
-    async addProject(@Body() projectDto: CreateProjectDto) {
+    async addProject(@Body() projectDto: any) {
         return this.projectService.addProject(projectDto);
 
     }

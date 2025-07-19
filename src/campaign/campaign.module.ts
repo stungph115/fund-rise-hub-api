@@ -6,10 +6,11 @@ import { PassportModule } from '@nestjs/passport';
 import { env } from 'env';
 import { JwtModule } from '@nestjs/jwt';
 import { Campaign } from './campaign.entity';
+import { Project } from 'src/project/project.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Campaign]),
+    TypeOrmModule.forFeature([Campaign, Project]),
     PassportModule.register({
       defaultStrategy: 'jwt'
     }),
